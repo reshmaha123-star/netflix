@@ -1,4 +1,7 @@
 """Compatibility entry point for Streamlit Cloud deployments."""
 
-# The actual dashboard and data handling live in app.py.
-import app  # noqa: F401
+from pathlib import Path
+import runpy
+
+# Run the dashboard on every Streamlit rerun; a regular import would be cached.
+runpy.run_path(str(Path(__file__).with_name("app.py")), run_name="__main__")
